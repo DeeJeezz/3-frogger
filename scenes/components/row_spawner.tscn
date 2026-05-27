@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://d0ak43gx74s5h"]
+
+[ext_resource type="Script" uid="uid://dgoepchmjudkm" path="res://scripts/components/row_spawner.gd" id="1_glpf1"]
+
+[node name="RowSpawner" type="Node2D" unique_id=1412850548]
+script = ExtResource("1_glpf1")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1057971047]
+one_shot = true

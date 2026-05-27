@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://b2p0sgkthnkix"]
+
+[ext_resource type="Script" uid="uid://dfe77pkbtcmvh" path="res://scripts/ui/main_menu.gd" id="1_1g8jr"]
+[ext_resource type="FontFile" uid="uid://hiyhp28juwmk" path="res://assets/fonts/OptionC_UpheavalPro.otf" id="1_sl1te"]
+[ext_resource type="FontFile" uid="uid://bsv73vo3pe3k1" path="res://assets/fonts/OptionB_SuperstarMemesbruh03.ttf" id="2_fe2o3"]
+
+[sub_resource type="Gradient" id="Gradient_87aya"]
+colors = PackedColorArray(0, 0, 0, 1, 0.14044744, 0.14044744, 0.14044744, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sl1te"]
+gradient = SubResource("Gradient_87aya")
+fill_from = Vector2(0.5, 0.2)
+fill_to = Vector2(0.5, 1)
+
+[node name="MainMenu" type="CanvasLayer" unique_id=700910789]
+script = ExtResource("1_1g8jr")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1237148279]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_sl1te")
+
+[node name="GameNameLabel" type="Label" parent="." unique_id=536523818]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -193.0
+offset_top = 67.0
+offset_right = 193.0
+offset_bottom = 123.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_sl1te")
+theme_override_font_sizes/font_size = 64
+text = "Frogger"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1693721359]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -6.0
+offset_right = 97.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=307069562]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fe2o3")
+theme_override_font_sizes/font_size = 16
+text = "Start game"
+
+[node name="LeadersButton" type="Button" parent="VBoxContainer" unique_id=1800572376]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fe2o3")
+theme_override_font_sizes/font_size = 16
+text = "Leader Board"
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1418986594]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="QuitGameButton" type="Button" parent="VBoxContainer" unique_id=51599924]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fe2o3")
+theme_override_font_sizes/font_size = 16
+text = "Quit"
+
+[connection signal="button_down" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/LeadersButton" to="." method="_on_leaders_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/QuitGameButton" to="." method="_on_quit_game_button_button_down"]

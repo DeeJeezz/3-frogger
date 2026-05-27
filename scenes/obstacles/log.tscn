@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://duawxxj1klc3g"]
+
+[ext_resource type="Texture2D" uid="uid://cls0aanl2j4dc" path="res://resources/obstacles/log1.tres" id="1_hq8to"]
+[ext_resource type="Script" uid="uid://c1qmef1mjda18" path="res://scripts/components/moving_obstacle.gd" id="1_tnmyx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnmyx"]
+size = Vector2(80, 16)
+
+[node name="Log" type="Area2D" unique_id=35376957]
+collision_layer = 4
+script = ExtResource("1_tnmyx")
+metadata/_custom_type_script = "uid://c1qmef1mjda18"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=899077189]
+texture = ExtResource("1_hq8to")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1185354750]
+position = Vector2(40, 8)
+shape = SubResource("RectangleShape2D_tnmyx")

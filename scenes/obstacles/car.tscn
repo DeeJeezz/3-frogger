@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bm208rxcxmehc"]
+
+[ext_resource type="Texture2D" uid="uid://duhkvpsphjodw" path="res://resources/obstacles/car1.tres" id="1_bo1q6"]
+[ext_resource type="Script" uid="uid://bqthv0kd5uhnw" path="res://scripts/car.gd" id="1_u04pm"]
+[ext_resource type="Texture2D" uid="uid://bja5vtt8q15de" path="res://resources/obstacles/car2.tres" id="3_jv8qg"]
+[ext_resource type="Texture2D" uid="uid://cyhsmfxtmg1fm" path="res://resources/obstacles/car3.tres" id="4_g6vqh"]
+[ext_resource type="Texture2D" uid="uid://b4n5c2y24e5e4" path="res://resources/obstacles/truck1.tres" id="5_g6vqh"]
+[ext_resource type="Texture2D" uid="uid://dhb2ccds230em" path="res://resources/obstacles/truck2.tres" id="6_csvl4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jv8qg"]
+size = Vector2(16, 16)
+
+[node name="Car" type="Area2D" unique_id=195956614]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_u04pm")
+variants = Array[AtlasTexture]([ExtResource("1_bo1q6"), ExtResource("3_jv8qg"), ExtResource("4_g6vqh"), ExtResource("5_g6vqh"), ExtResource("6_csvl4")])
+metadata/_custom_type_script = "uid://c1qmef1mjda18"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=454462599]
+texture = ExtResource("1_bo1q6")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1021331565]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_jv8qg")

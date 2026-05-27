@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cmb81cde4c2od"]
+
+[ext_resource type="Script" uid="uid://ducpvjtvidesj" path="res://scripts/components/obstacle_director.gd" id="1_qsle8"]
+
+[node name="ObstacleDirector" type="Node2D" unique_id=1987069212 node_paths=PackedStringArray("spawn_timer")]
+script = ExtResource("1_qsle8")
+spawn_timer = NodePath("SpawnTimer")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=462059858]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
