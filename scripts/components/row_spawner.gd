@@ -30,6 +30,8 @@ func _set_timer() -> void:
 
 
 func _spawn_object() -> void:
+	if not variants:
+		return
 	var object_scene: PackedScene = variants.pick_random()
 	var object: MovingObstacle = object_scene.instantiate()
 	object.speed = randf_range(min_speed, max_speed)

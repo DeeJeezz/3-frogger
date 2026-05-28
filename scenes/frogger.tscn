@@ -276,13 +276,13 @@ script = ExtResource("1_o6omq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1015564047]
 sprite_frames = SubResource("SpriteFrames_56thx")
-animation = &"idle_side"
+animation = &"idle_up"
 autoplay = "idle_down"
-frame_progress = 0.54554373
 centered = false
+offset = Vector2(0, -2)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1285808055]
-collision_mask = 6
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=945190360]
 position = Vector2(8, 8)

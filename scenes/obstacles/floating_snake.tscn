@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bm5i0bf5p8pp1"]
+
+[ext_resource type="Script" uid="uid://drixiyo0snff" path="res://scripts/floating_snake.gd" id="1_xo5hc"]
+[ext_resource type="Texture2D" uid="uid://bh62b4fr01y33" path="res://resources/obstacles/floating_snake1.tres" id="2_xo5hc"]
+[ext_resource type="Texture2D" uid="uid://eihg8m1tyv4s" path="res://resources/obstacles/floating_snake2.tres" id="3_mryef"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0cjte"]
+size = Vector2(16, 16)
+
+[node name="FloatingSnake" type="Area2D" unique_id=1410586654]
+collision_layer = 2
+script = ExtResource("1_xo5hc")
+variants = Array[AtlasTexture]([ExtResource("2_xo5hc"), ExtResource("3_mryef")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1954684023]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_0cjte")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=255479647]
+texture = ExtResource("2_xo5hc")
+centered = false

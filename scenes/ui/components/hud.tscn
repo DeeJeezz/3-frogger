@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://rvmkwrsp64im"]
+
+[ext_resource type="Script" uid="uid://cffgruylgrcd0" path="res://scripts/ui/hud.gd" id="1_m5hwf"]
+[ext_resource type="FontFile" uid="uid://c1h0oesojwsgi" path="res://assets/fonts/OptionA_ModernDOS8x14.ttf" id="2_6a50e"]
+[ext_resource type="FontFile" uid="uid://bsv73vo3pe3k1" path="res://assets/fonts/OptionB_SuperstarMemesbruh03.ttf" id="3_hxakc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5hwf"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_6a50e"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hxakc"]
+gradient = SubResource("Gradient_6a50e")
+
+[sub_resource type="Gradient" id="Gradient_se563"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qmnuf"]
+gradient = SubResource("Gradient_se563")
+
+[node name="HUD" type="CanvasLayer" unique_id=1565496577 node_paths=PackedStringArray("score_label", "life_label", "time_progress_bar", "start_level_timer_label")]
+script = ExtResource("1_m5hwf")
+score_label = NodePath("TopPanel/RecordScoreLabel")
+life_label = NodePath("BottomPanel/HBoxContainer/LifeLabel")
+time_progress_bar = NodePath("BottomPanel/MarginContainer/TimeProgressBar")
+start_level_timer_label = NodePath("StartLevelTimerLabel")
+
+[node name="TopPanel" type="Panel" parent="." unique_id=1242929926]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m5hwf")
+
+[node name="RecordScoreNameLabel" type="Label" parent="TopPanel" unique_id=201140853]
+layout_mode = 1
+offset_left = 16.0
+offset_right = 96.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 16
+text = "HI-SCORE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RecordScoreLabel" type="Label" parent="TopPanel" unique_id=1389605158]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -16.0
+offset_right = 96.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 16
+text = "123123"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreNameLabel" type="Label" parent="TopPanel" unique_id=183062759]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_bottom = 16.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 16
+text = "SCORE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="TopPanel" unique_id=509988756]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 16
+text = "123123"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomPanel" type="Panel" parent="." unique_id=1705308154]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m5hwf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BottomPanel" unique_id=205285465]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -20.0
+offset_right = 74.0
+offset_bottom = 20.0
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LifeNameLabel" type="Label" parent="BottomPanel/HBoxContainer" unique_id=98770095]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 20
+text = "LIFE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LifeLabel" type="Label" parent="BottomPanel/HBoxContainer" unique_id=961794806]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 20
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomPanel" unique_id=1644994996]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -176.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="TimeProgressBar" type="TextureProgressBar" parent="BottomPanel/MarginContainer" unique_id=1666013697]
+layout_mode = 2
+value = 10.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture1D_hxakc")
+texture_progress = SubResource("GradientTexture1D_qmnuf")
+
+[node name="Label" type="Label" parent="BottomPanel/MarginContainer/TimeProgressBar" unique_id=74335198]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_6a50e")
+theme_override_font_sizes/font_size = 24
+text = "TIME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartLevelTimerLabel" type="Label" parent="." unique_id=936351130]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_hxakc")
+theme_override_font_sizes/font_size = 52
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1

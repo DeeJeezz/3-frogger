@@ -1,10 +1,13 @@
 class_name Frogger
 extends Node2D
 
-@export var ground_layer: TileMapLayer
+signal moved
+signal died
 
 var is_on_water: bool = false
+var can_move: bool = false
 
+var _finished: bool = false
 var _previous_direction: Vector2 = Vector2.DOWN
 var _can_move: bool = true
 var _floating: bool = false
@@ -19,16 +22,41 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if _finished:
+		return
+		
+	if not can_move:
+		return
+
 	_handle_input()
 	if is_on_water and not _floating:
-		if not _death_in_progress:
-			_death()
+		death()
+	if position.x < 0 or position.x >= Constants.SCREEN_SIZE.x:
+		death()
+
+
+func finish() -> void:
+	set_deferred("_finished", true)
+	hurt_box.set_deferred("monitoring", false)
+	animated_sprite.play("idle_down")
+
+
+func death() -> void:
+	if _death_in_progress:
+		return
+	_death_in_progress = true
+	_can_move = false
+	hurt_box.set_deferred("monitoring", false)
+	hurt_box.set_deferred("monitorable", false)
+	animated_sprite.animation_finished.disconnect(_play_idle_animation)
+	animated_sprite.play("death")
+	animated_sprite.animation_finished.connect(queue_free)
 
 
 func _check_boundaries(next_position: Vector2) -> bool:
 	if next_position.x >= Constants.SCREEN_SIZE.x or next_position.x < 0:
 		return false
-	if next_position.y < 0 or next_position.y >= Constants.SCREEN_SIZE.y:
+	if next_position.y < Constants.STEP_SIZE * 2 or next_position.y >= Constants.SCREEN_SIZE.y - Constants.STEP_SIZE * 2:
 		return false
 
 	return true
@@ -55,18 +83,8 @@ func _move(direction: Vector2) -> void:
 		animated_sprite.play("walk_down")
 	elif direction.y < 0:
 		animated_sprite.play("walk_up")
-	_is_on_water()
-
-
-func _is_on_water() -> void:
-	var local_position: Vector2 = ground_layer.to_local(global_position)
-	var tile_position: Vector2i = ground_layer.local_to_map(local_position)
-	var tile: TileData = ground_layer.get_cell_tile_data(tile_position)
-
-	if tile == null:
-		set_deferred("is_on_water", false)
-	else:
-		set_deferred("is_on_water", tile.get_custom_data(Constants.WATER_TILEMAP_LAYER_NAME) == true)
+	_snap_to_global_grid()
+	moved.emit()
 
 
 func _handle_input() -> void:
@@ -89,15 +107,8 @@ func _play_idle_animation() -> void:
 		animated_sprite.play("idle_up")
 
 
-func _death() -> void:
-	_death_in_progress = true
-	_can_move = false
-	hurt_box.set_deferred("monitoring", false)
-	hurt_box.set_deferred("monitorable", false)
-	animated_sprite.animation_finished.disconnect(_play_idle_animation)
-	animated_sprite.play("death")
-	Signals.game_over.emit()
-	animated_sprite.animation_finished.connect(queue_free)
+func _exit_tree() -> void:
+	died.emit()
 
 
 ## Snaps object to local grid.
@@ -116,7 +127,7 @@ func _snap_to_global_grid() -> void:
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	if area.collision_layer == Constants.DEATH_COLLISION_LAYER:
-		_death()
+		death()
 		return
 	# If player moved on the floating object.
 	elif area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
@@ -128,13 +139,13 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 func _on_hurt_box_area_exited(area: Area2D) -> void:
 	if area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
 
-		# Check if player moved to another floating area.
-		var next_areas: Array[Area2D] = hurt_box.get_overlapping_areas()
-		for next_area in next_areas:
-			if area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
-				_floating = true
-				return
+		if hurt_box.monitoring:
+			# Check if player moved to another floating area.
+			var next_areas: Array[Area2D] = hurt_box.get_overlapping_areas()
+			for next_area in next_areas:
+				if area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
+					_floating = true
+					return
 
-		_snap_to_global_grid()
 		_floating = false
 		return
