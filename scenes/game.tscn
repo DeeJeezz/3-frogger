@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://c5jjp6eby731f"]
 
 [ext_resource type="Script" uid="uid://dxpmqnhhkpt6v" path="res://scripts/game.gd" id="1_uwrxv"]
+[ext_resource type="AudioStream" uid="uid://0uets21ve07p" path="res://assets/audio/background/music_track_Gameplay.mp3" id="2_yqjtg"]
 
-[node name="Game" type="Node" unique_id=1089095631]
+[node name="Game" type="Node" unique_id=1089095631 node_paths=PackedStringArray("background_music")]
 script = ExtResource("1_uwrxv")
+background_music = NodePath("BackgroundMusic")
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=1919913758]
+stream = ExtResource("2_yqjtg")
+volume_db = -10.0
+autoplay = true

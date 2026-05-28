@@ -15,6 +15,9 @@ var _death_in_progress: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_box: Area2D = $HurtBox
+@onready var move_sfx_player: AudioStreamPlayer2D = $SFX/MoveSFXPlayer
+@onready var road_death_sfx_player: AudioStreamPlayer2D = $SFX/RoadDeathSFXPlayer
+@onready var water_death_sfx_player: AudioStreamPlayer2D = $SFX/WaterDeathSFXPlayer
 
 
 func _ready() -> void:
@@ -24,7 +27,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if _finished:
 		return
-		
+
 	if not can_move:
 		return
 
@@ -50,6 +53,10 @@ func death() -> void:
 	hurt_box.set_deferred("monitorable", false)
 	animated_sprite.animation_finished.disconnect(_play_idle_animation)
 	animated_sprite.play("death")
+	if is_on_water:
+		water_death_sfx_player.play()
+	else:
+		road_death_sfx_player.play()
 	animated_sprite.animation_finished.connect(queue_free)
 
 
@@ -85,6 +92,7 @@ func _move(direction: Vector2) -> void:
 		animated_sprite.play("walk_up")
 	_snap_to_global_grid()
 	moved.emit()
+	move_sfx_player.play()
 
 
 func _handle_input() -> void:

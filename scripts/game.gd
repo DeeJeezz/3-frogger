@@ -3,6 +3,9 @@ extends Node
 var _current_scene: Node
 
 
+@export var background_music: AudioStreamPlayer
+
+
 func _ready() -> void:
 	_load_scene_from_file(Constants.MAIN_MENU_SCENE_PATH)
 	Signals.scene_changed.connect(_load_scene_from_file)
