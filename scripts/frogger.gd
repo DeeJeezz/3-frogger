@@ -4,6 +4,11 @@ extends Node2D
 signal moved
 signal died
 
+@export var move_sfx: AudioStream
+@export var water_death_sfx: AudioStream
+@export var road_death_sfx: AudioStream
+@export var finish_sfx: AudioStream
+
 var is_on_water: bool = false
 var can_move: bool = false
 
@@ -15,9 +20,10 @@ var _death_in_progress: bool = false
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_box: Area2D = $HurtBox
-@onready var move_sfx_player: AudioStreamPlayer2D = $SFX/MoveSFXPlayer
-@onready var road_death_sfx_player: AudioStreamPlayer2D = $SFX/RoadDeathSFXPlayer
-@onready var water_death_sfx_player: AudioStreamPlayer2D = $SFX/WaterDeathSFXPlayer
+#region SFX
+@onready var sfx_player: AudioStreamPlayer2D = $SFXPlayer
+
+#endregion
 
 
 func _ready() -> void:
@@ -42,6 +48,8 @@ func finish() -> void:
 	set_deferred("_finished", true)
 	hurt_box.set_deferred("monitoring", false)
 	animated_sprite.play("idle_down")
+	sfx_player.stream = finish_sfx
+	sfx_player.play()
 
 
 func death() -> void:
@@ -54,9 +62,10 @@ func death() -> void:
 	animated_sprite.animation_finished.disconnect(_play_idle_animation)
 	animated_sprite.play("death")
 	if is_on_water:
-		water_death_sfx_player.play()
+		sfx_player.stream = water_death_sfx
 	else:
-		road_death_sfx_player.play()
+		sfx_player.stream = road_death_sfx
+	sfx_player.play()
 	animated_sprite.animation_finished.connect(queue_free)
 
 
@@ -92,7 +101,8 @@ func _move(direction: Vector2) -> void:
 		animated_sprite.play("walk_up")
 	_snap_to_global_grid()
 	moved.emit()
-	move_sfx_player.play()
+	sfx_player.stream = move_sfx
+	sfx_player.play()
 
 
 func _handle_input() -> void:

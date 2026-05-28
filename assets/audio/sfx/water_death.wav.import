@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://jhjqiwca2qb"
-path="res://.godot/imported/sfx_classic_plunk.wav-a7910021525e69b97787dc108a3ebbec.sample"
+path="res://.godot/imported/water_death.wav-dafd56680bb83c0765176c837cf8f495.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/sfx_classic_plunk.wav"
-dest_files=["res://.godot/imported/sfx_classic_plunk.wav-a7910021525e69b97787dc108a3ebbec.sample"]
+source_file="res://assets/audio/sfx/water_death.wav"
+dest_files=["res://.godot/imported/water_death.wav-dafd56680bb83c0765176c837cf8f495.sample"]
 
 [params]
 

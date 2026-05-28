@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://54wfrrv4oymm" path="res://scripts/frogger.gd" id="1_o6omq"]
 [ext_resource type="Texture2D" uid="uid://bt44nus2tl8jb" path="res://assets/img/SpritesSheet_Frogger.png" id="2_1t0a8"]
-[ext_resource type="AudioStream" uid="uid://bfnuws006c7jp" path="res://assets/audio/sfx/sfx_classic_jump.wav" id="3_1t0a8"]
-[ext_resource type="AudioStream" uid="uid://3subpy8qu78x" path="res://assets/audio/sfx/sfx_classic_squash.wav" id="4_x5484"]
-[ext_resource type="AudioStream" uid="uid://jhjqiwca2qb" path="res://assets/audio/sfx/sfx_classic_plunk.wav" id="5_t384a"]
+[ext_resource type="AudioStream" uid="uid://jeadpfh0qbqc" path="res://assets/audio/sfx/jump.ogg" id="2_8e8fl"]
+[ext_resource type="AudioStream" uid="uid://bfnuws006c7jp" path="res://assets/audio/sfx/finish.wav" id="3_1t0a8"]
+[ext_resource type="AudioStream" uid="uid://3subpy8qu78x" path="res://assets/audio/sfx/road_death.wav" id="4_x5484"]
+[ext_resource type="AudioStream" uid="uid://jhjqiwca2qb" path="res://assets/audio/sfx/water_death.wav" id="5_t384a"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qyo2l"]
 atlas = ExtResource("2_1t0a8")
@@ -276,6 +277,10 @@ size = Vector2(10, 10)
 
 [node name="Frogger" type="Node2D" unique_id=395855831]
 script = ExtResource("1_o6omq")
+move_sfx = ExtResource("2_8e8fl")
+water_death_sfx = ExtResource("5_t384a")
+road_death_sfx = ExtResource("4_x5484")
+finish_sfx = ExtResource("3_1t0a8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1015564047]
 sprite_frames = SubResource("SpriteFrames_56thx")
@@ -291,16 +296,8 @@ collision_mask = 7
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_o6omq")
 
-[node name="SFX" type="Node2D" parent="." unique_id=1548819277]
-
-[node name="MoveSFXPlayer" type="AudioStreamPlayer2D" parent="SFX" unique_id=1252318659]
+[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1252318659]
 stream = ExtResource("3_1t0a8")
-
-[node name="RoadDeathSFXPlayer" type="AudioStreamPlayer2D" parent="SFX" unique_id=1629807473]
-stream = ExtResource("4_x5484")
-
-[node name="WaterDeathSFXPlayer" type="AudioStreamPlayer2D" parent="SFX" unique_id=700447709]
-stream = ExtResource("5_t384a")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_exited" from="HurtBox" to="." method="_on_hurt_box_area_exited"]

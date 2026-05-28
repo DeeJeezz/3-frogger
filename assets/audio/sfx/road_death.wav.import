@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://3subpy8qu78x"
-path="res://.godot/imported/sfx_classic_squash.wav-05317e1221c5fc0c63ad5f3f1d58b04a.sample"
+path="res://.godot/imported/road_death.wav-ddfdacbe70ab7408b5fd5aaf9539983c.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/sfx_classic_squash.wav"
-dest_files=["res://.godot/imported/sfx_classic_squash.wav-05317e1221c5fc0c63ad5f3f1d58b04a.sample"]
+source_file="res://assets/audio/sfx/road_death.wav"
+dest_files=["res://.godot/imported/road_death.wav-ddfdacbe70ab7408b5fd5aaf9539983c.sample"]
 
 [params]
 
