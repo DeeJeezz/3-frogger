@@ -6,9 +6,48 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tnmyx"]
 size = Vector2(80, 16)
 
+[sub_resource type="Animation" id="Animation_yutxc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tqgwc"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.95)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0gi12"]
+_data = {
+&"RESET": SubResource("Animation_yutxc"),
+&"default": SubResource("Animation_tqgwc")
+}
+
 [node name="Log" type="Area2D" unique_id=35376957]
 collision_layer = 4
 script = ExtResource("1_m4plt")
+snake_possibility = 0.2
 metadata/_custom_type_script = "uid://c1qmef1mjda18"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=899077189]
@@ -18,3 +57,7 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1185354750]
 position = Vector2(40, 8)
 shape = SubResource("RectangleShape2D_tnmyx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=521139170]
+libraries/ = SubResource("AnimationLibrary_0gi12")
+autoplay = &"default"

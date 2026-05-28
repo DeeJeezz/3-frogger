@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d0ak43gx74s5h" path="res://scenes/components/row_spawner.tscn" id="5_6761a"]
 [ext_resource type="PackedScene" uid="uid://bm5i0bf5p8pp1" path="res://scenes/obstacles/floating_snake.tscn" id="5_oc4kc"]
 [ext_resource type="PackedScene" uid="uid://rvmkwrsp64im" path="res://scenes/ui/components/hud.tscn" id="6_sk5k4"]
+[ext_resource type="PackedScene" uid="uid://c063wk8or3apv" path="res://scenes/pickable/life.tscn" id="8_s8va5"]
 
 [sub_resource type="Gradient" id="Gradient_ksju7"]
 offsets = PackedFloat32Array(0)
@@ -76,6 +77,14 @@ max_time = 1.6
 
 [node name="FroggerStartPosition" type="Marker2D" parent="." unique_id=839266906]
 position = Vector2(240, 224)
+
+[node name="Pickables" type="Node2D" parent="." unique_id=1248662483]
+
+[node name="Life" parent="Pickables" unique_id=1613531011 instance=ExtResource("8_s8va5")]
+position = Vector2(48, 160)
+
+[node name="Life2" parent="Pickables" unique_id=1236438111 instance=ExtResource("8_s8va5")]
+position = Vector2(400, 192)
 
 [node name="RoadSpawnPoints" type="Node2D" parent="." unique_id=1716879868]
 

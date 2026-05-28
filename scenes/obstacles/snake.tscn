@@ -9,7 +9,7 @@ size = Vector2(16, 16)
 
 [node name="Snake" type="Area2D" unique_id=1436474777]
 collision_layer = 0
-monitoring = false
+monitorable = false
 script = ExtResource("1_8xkx3")
 variants = Array[AtlasTexture]([ExtResource("1_k10jg"), ExtResource("3_2n73i")])
 

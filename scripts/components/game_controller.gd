@@ -51,6 +51,12 @@ func _ready() -> void:
 	hud.setup(_level_time)
 	_spawn_frogger(false)
 
+	Signals.add_life.connect(_on_add_life)
+
+
+func _on_add_life() -> void:
+	lives += 1
+
 
 ## Countdown before player can move frogger.
 func _on_start_level_timer_timeout() -> void:
@@ -119,6 +125,7 @@ func _check_is_on_finish(tile: TileData, tile_position: Vector2i) -> void:
 			return
 
 		_spawn_frogger(true)
+
 
 ## Signal processor of current [Frogger] movement. Checks if current [Frogger] is on "Water" of "Finish" tile.
 func _on_frogger_moved() -> void:

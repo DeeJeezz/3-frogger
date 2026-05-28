@@ -39,6 +39,14 @@ region = Rect2(96, 48, 16, 16)
 atlas = ExtResource("2_1t0a8")
 region = Rect2(112, 48, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1whi"]
+atlas = ExtResource("2_1t0a8")
+region = Rect2(0, 76, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1nn5v"]
+atlas = ExtResource("2_1t0a8")
+region = Rect2(16, 76, 16, 19)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_o6omq"]
 atlas = ExtResource("2_1t0a8")
 region = Rect2(32, 0, 16, 16)
@@ -62,6 +70,18 @@ region = Rect2(32, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8e8fl"]
 atlas = ExtResource("2_1t0a8")
 region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05wtr"]
+atlas = ExtResource("2_1t0a8")
+region = Rect2(32, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdecp"]
+atlas = ExtResource("2_1t0a8")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg1hx"]
+atlas = ExtResource("2_1t0a8")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4au2m"]
 atlas = ExtResource("2_1t0a8")
@@ -171,6 +191,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_u1whi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1nn5v")
+}],
+"loop": true,
+"name": &"finish",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_o6omq")
 }, {
 "duration": 1.0,
@@ -201,6 +232,20 @@ animations = [{
 "loop": true,
 "name": &"idle_up",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05wtr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fdecp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg1hx")
+}],
+"loop": false,
+"name": &"pre_finish",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -282,15 +327,24 @@ water_death_sfx = ExtResource("5_t384a")
 road_death_sfx = ExtResource("4_x5484")
 finish_sfx = ExtResource("3_1t0a8")
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=198978880]
+texture = ExtResource("2_1t0a8")
+centered = false
+offset = Vector2(0, -2)
+region_enabled = true
+region_rect = Rect2(96, 0, 16, 16)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1015564047]
 sprite_frames = SubResource("SpriteFrames_56thx")
-animation = &"idle_up"
+animation = &"pre_finish"
 autoplay = "idle_down"
+frame = 2
+frame_progress = 1.0
 centered = false
 offset = Vector2(0, -2)
 
 [node name="HurtBox" type="Area2D" parent="." unique_id=1285808055]
-collision_mask = 7
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=945190360]
 position = Vector2(8, 8)

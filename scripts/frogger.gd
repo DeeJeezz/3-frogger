@@ -47,7 +47,9 @@ func _physics_process(_delta: float) -> void:
 func finish() -> void:
 	set_deferred("_finished", true)
 	hurt_box.set_deferred("monitoring", false)
-	animated_sprite.play("idle_down")
+	animated_sprite.animation_finished.disconnect(_play_idle_animation)
+	animated_sprite.play("pre_finish")
+	animated_sprite.animation_finished.connect(animated_sprite.play.bind("finish"))
 	sfx_player.stream = finish_sfx
 	sfx_player.play()
 
@@ -99,7 +101,6 @@ func _move(direction: Vector2) -> void:
 		animated_sprite.play("walk_down")
 	elif direction.y < 0:
 		animated_sprite.play("walk_up")
-	_snap_to_global_grid()
 	moved.emit()
 	sfx_player.stream = move_sfx
 	sfx_player.play()
@@ -144,26 +145,27 @@ func _snap_to_global_grid() -> void:
 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
-	if area.collision_layer == Constants.DEATH_COLLISION_LAYER:
-		death()
-		return
 	# If player moved on the floating object.
-	elif area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
+	if area is Log:
 		_floating = true
 		_snap_to_local_grid(area)
+		return
+	# If player moved on the other MovingObstacle.
+	elif area is MovingObstacle:
+		death()
 		return
 
 
 func _on_hurt_box_area_exited(area: Area2D) -> void:
-	if area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
-
+	if area is Log:
 		if hurt_box.monitoring:
 			# Check if player moved to another floating area.
 			var next_areas: Array[Area2D] = hurt_box.get_overlapping_areas()
 			for next_area in next_areas:
-				if area.collision_layer == Constants.FLOATING_COLLISION_LAYER:
+				if area is Log:
 					_floating = true
 					return
 
 		_floating = false
+		_snap_to_global_grid()
 		return
