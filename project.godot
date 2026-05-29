@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 
 Signals="*uid://j46r16sjo57e"
 Constants="*uid://b7t7wgdvwrv8a"
+Session="*uid://d6xj6qe3uo4r"
+SaveManager="*uid://cmmuhoi48afn7"
 
 [debug]
 

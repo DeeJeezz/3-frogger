@@ -21,9 +21,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_qmnuf"]
 gradient = SubResource("Gradient_se563")
 
-[node name="HUD" type="CanvasLayer" unique_id=1565496577 node_paths=PackedStringArray("score_label", "life_label", "time_progress_bar", "start_level_timer_label")]
+[node name="HUD" type="CanvasLayer" unique_id=1565496577 node_paths=PackedStringArray("score_label", "record_score_label", "life_label", "time_progress_bar", "start_level_timer_label")]
 script = ExtResource("1_m5hwf")
-score_label = NodePath("TopPanel/RecordScoreLabel")
+score_label = NodePath("TopPanel/ScoreLabel")
+record_score_label = NodePath("TopPanel/RecordScoreLabel")
 life_label = NodePath("BottomPanel/HBoxContainer/LifeLabel")
 time_progress_bar = NodePath("BottomPanel/MarginContainer/TimeProgressBar")
 start_level_timer_label = NodePath("StartLevelTimerLabel")

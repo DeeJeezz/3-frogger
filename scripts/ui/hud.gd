@@ -2,6 +2,7 @@ class_name HUD
 extends CanvasLayer
 
 @export var score_label: Label
+@export var record_score_label: Label
 @export var life_label: Label
 @export var time_progress_bar: TextureProgressBar
 @export var start_level_timer_label: Label
@@ -16,6 +17,10 @@ func set_start_level_time(value: int) -> void:
 func set_score(score: int) -> void:
 	# TODO: Сделать в ретро-стиле - с ведущими нулями.
 	score_label.text = "%d" % score
+	
+	
+func set_record_score(score: int) -> void:
+	record_score_label.text = "%d" % score
 
 
 func set_lives(lives: int) -> void:

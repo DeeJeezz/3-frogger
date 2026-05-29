@@ -14,6 +14,10 @@ const DEATH_COLLISION_LAYER: int = 2
 const FROGGER_COLLISION_LAYER: int = 1
 const OBSTACLE_DESTROY_OFFSET: float = 150.0
 
+const SCORE_FOR_MOVEMENT: int = 10
+const SCORE_FOR_PICKUP: int = 50
+const SCORE_FOR_FINISH: int = 1000
+
 var SCREEN_SIZE: Vector2
 
 

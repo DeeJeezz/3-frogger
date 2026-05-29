@@ -37,6 +37,13 @@ var _level_time: int = level_time:
 		if hud:
 			hud.set_level_time(value)
 
+var _score: int = 0:
+	set(value):
+		_score = value
+		Session.score = value
+		if hud:
+			hud.set_score(value)
+
 # Storage for occupied finish tiles positions.
 var _occupied_tiles: Array[Vector2i] = []
 
@@ -45,16 +52,24 @@ var _frogger: Frogger
 
 
 func _ready() -> void:
+	Session.load_session()
+	hud.set_record_score(Session.record_score)
+	# Setup timers.
 	level_timer.timeout.connect(_on_level_timer_timeout)
 	start_level_timer.timeout.connect(_on_start_level_timer_timeout)
+	# Setup UI.
+	_score = 0
 	hud.setup(lives, _level_time, time_to_start)
+	# Spawn player's frogger.
 	_spawn_frogger(false)
-
+	# Connect signals.
 	Signals.add_life.connect(_on_add_life)
 
 
+## Process "Life" pickup effect.
 func _on_add_life() -> void:
 	lives += 1
+	_score += Constants.SCORE_FOR_PICKUP
 
 
 ## Countdown before player can move frogger.
@@ -119,6 +134,7 @@ func _check_is_on_finish(tile: TileData, tile_position: Vector2i) -> void:
 			return
 		_frogger.call_deferred("finish")
 		_occupied_tiles.append(tile_position)
+		_score += Constants.SCORE_FOR_FINISH
 
 		# Win game condition.
 		if _occupied_tiles.size() == finish_tiles:
@@ -128,20 +144,25 @@ func _check_is_on_finish(tile: TileData, tile_position: Vector2i) -> void:
 		_spawn_frogger(true)
 
 
+## Call when player wins the game.
 func _win() -> void:
 	level_timer.stop()
 	var win_scene: PackedScene = load(Constants.WIN_SCREEN_SCENE_PATH)
 	get_tree().current_scene.call_deferred("add_child", win_scene.instantiate())
+	Session.save_session()
 
 
+## Call when player looses the game.
 func _defeat() -> void:
 	level_timer.stop()
 	var defeat_scene: PackedScene = load(Constants.DEFEAT_SCREEN_SCENE_PATH)
 	get_tree().current_scene.call_deferred("add_child", defeat_scene.instantiate())
+	Session.save_session()
 
 
 ## Signal processor of current [Frogger] movement. Checks if current [Frogger] is on "Water" of "Finish" tile.
 func _on_frogger_moved() -> void:
+	_score += Constants.SCORE_FOR_MOVEMENT
 	var local_position: Vector2 = ground_layer.to_local(_frogger.global_position)
 	local_position.x = snapped(local_position.x, Constants.STEP_SIZE)
 	var tile_position: Vector2i = ground_layer.local_to_map(local_position)
