@@ -4,11 +4,6 @@ extends Node2D
 signal moved
 signal died
 
-@export var move_sfx: AudioStream
-@export var water_death_sfx: AudioStream
-@export var road_death_sfx: AudioStream
-@export var finish_sfx: AudioStream
-
 var is_on_water: bool = false
 var can_move: bool = false
 
@@ -21,8 +16,10 @@ var _death_in_progress: bool = false
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hurt_box: Area2D = $HurtBox
 #region SFX
-@onready var sfx_player: AudioStreamPlayer2D = $SFXPlayer
-
+@onready var move_sfx: AudioStreamPlayer2D = $MoveSFXPlayer
+@onready var road_death_sfx: AudioStreamPlayer2D = $RoadDeathSFXPlayer
+@onready var water_death_sfx: AudioStreamPlayer2D = $WaterDeathSFXPlayer
+@onready var finish_sfx: AudioStreamPlayer2D = $FinishSFXPlayer
 #endregion
 
 
@@ -45,13 +42,13 @@ func _physics_process(_delta: float) -> void:
 
 
 func finish() -> void:
+	_snap_to_global_grid()
 	set_deferred("_finished", true)
 	hurt_box.set_deferred("monitoring", false)
 	animated_sprite.animation_finished.disconnect(_play_idle_animation)
 	animated_sprite.play("pre_finish")
 	animated_sprite.animation_finished.connect(animated_sprite.play.bind("finish"))
-	sfx_player.stream = finish_sfx
-	sfx_player.play()
+	finish_sfx.play()
 
 
 func death() -> void:
@@ -64,10 +61,9 @@ func death() -> void:
 	animated_sprite.animation_finished.disconnect(_play_idle_animation)
 	animated_sprite.play("death")
 	if is_on_water:
-		sfx_player.stream = water_death_sfx
+		water_death_sfx.play()
 	else:
-		sfx_player.stream = road_death_sfx
-	sfx_player.play()
+		road_death_sfx.play()
 	animated_sprite.animation_finished.connect(queue_free)
 
 
@@ -101,9 +97,8 @@ func _move(direction: Vector2) -> void:
 		animated_sprite.play("walk_down")
 	elif direction.y < 0:
 		animated_sprite.play("walk_up")
+	move_sfx.play()
 	moved.emit()
-	sfx_player.stream = move_sfx
-	sfx_player.play()
 
 
 func _handle_input() -> void:
@@ -141,12 +136,12 @@ func _snap_to_local_grid(object: Node2D) -> void:
 ## Snaps object to global grid.
 func _snap_to_global_grid() -> void:
 	var closest_grid_point_x: float = snapped(position.x, Constants.STEP_SIZE)
-	global_position.x = closest_grid_point_x
+	position.x = closest_grid_point_x
 
 
 func _on_hurt_box_area_entered(area: Area2D) -> void:
 	# If player moved on the floating object.
-	if area is Log:
+	if area is Log or area is Lilypad:
 		_floating = true
 		_snap_to_local_grid(area)
 		return
@@ -157,15 +152,14 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 
 
 func _on_hurt_box_area_exited(area: Area2D) -> void:
-	if area is Log:
+	if area is Log or area is Lilypad:
 		if hurt_box.monitoring:
 			# Check if player moved to another floating area.
 			var next_areas: Array[Area2D] = hurt_box.get_overlapping_areas()
 			for next_area in next_areas:
-				if area is Log:
+				if area is Log or area is Lilypad:
 					_floating = true
 					return
-
 		_floating = false
 		_snap_to_global_grid()
 		return

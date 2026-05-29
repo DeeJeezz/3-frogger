@@ -17,9 +17,8 @@ extends Node2D
 @export var finish_tiles: int = 5
 ## How much time player have to reach finish tile.
 @export var level_time: int = 30
-
-# Time to wait before player can control the frogger.
-var time_to_start: int = 3:
+## Time to wait before player can control the frogger.
+@export var time_to_start: int = 3:
 	set(value):
 		time_to_start = value
 		if hud:
@@ -48,7 +47,7 @@ var _frogger: Frogger
 func _ready() -> void:
 	level_timer.timeout.connect(_on_level_timer_timeout)
 	start_level_timer.timeout.connect(_on_start_level_timer_timeout)
-	hud.setup(_level_time)
+	hud.setup(_level_time, time_to_start)
 	_spawn_frogger(false)
 
 	Signals.add_life.connect(_on_add_life)
@@ -130,6 +129,7 @@ func _check_is_on_finish(tile: TileData, tile_position: Vector2i) -> void:
 ## Signal processor of current [Frogger] movement. Checks if current [Frogger] is on "Water" of "Finish" tile.
 func _on_frogger_moved() -> void:
 	var local_position: Vector2 = ground_layer.to_local(_frogger.global_position)
+	local_position.x = snapped(local_position.x, Constants.STEP_SIZE)
 	var tile_position: Vector2i = ground_layer.local_to_map(local_position)
 	var tile: TileData = ground_layer.get_cell_tile_data(tile_position)
 	_check_is_on_finish(tile, tile_position)

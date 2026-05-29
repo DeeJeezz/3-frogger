@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bm208rxcxmehc" path="res://scenes/obstacles/car.tscn" id="4_x42e6"]
 [ext_resource type="PackedScene" uid="uid://d0ak43gx74s5h" path="res://scenes/components/row_spawner.tscn" id="5_6761a"]
 [ext_resource type="PackedScene" uid="uid://bm5i0bf5p8pp1" path="res://scenes/obstacles/floating_snake.tscn" id="5_oc4kc"]
+[ext_resource type="PackedScene" uid="uid://dp8b147v68x72" path="res://scenes/obstacles/lilypad.tscn" id="6_dga24"]
 [ext_resource type="PackedScene" uid="uid://rvmkwrsp64im" path="res://scenes/ui/components/hud.tscn" id="6_sk5k4"]
 [ext_resource type="PackedScene" uid="uid://c063wk8or3apv" path="res://scenes/pickable/life.tscn" id="8_s8va5"]
 
@@ -43,7 +44,7 @@ tile_set = ExtResource("1_ksju7")
 
 [node name="RowSpawner" parent="RiverSpawnPoints" unique_id=1412850548 instance=ExtResource("5_6761a")]
 position = Vector2(-80, 64)
-variants = Array[PackedScene]([ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
+variants = Array[PackedScene]([ExtResource("6_dga24"), ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
 min_speed = 60.0
 max_speed = 70.0
 min_time = 2.0
@@ -51,7 +52,7 @@ max_time = 2.5
 
 [node name="RowSpawner2" parent="RiverSpawnPoints" unique_id=887649490 instance=ExtResource("5_6761a")]
 position = Vector2(576, 80)
-variants = Array[PackedScene]([ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
+variants = Array[PackedScene]([ExtResource("6_dga24"), ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
 direction = -1
 min_speed = 80.0
 max_speed = 90.0
@@ -60,7 +61,7 @@ max_time = 3.6
 
 [node name="RowSpawner3" parent="RiverSpawnPoints" unique_id=1705639697 instance=ExtResource("5_6761a")]
 position = Vector2(-80, 96)
-variants = Array[PackedScene]([ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
+variants = Array[PackedScene]([ExtResource("6_dga24"), ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
 min_speed = 55.0
 max_speed = 60.0
 min_time = 4.0
@@ -68,7 +69,7 @@ max_time = 4.5
 
 [node name="RowSpawner4" parent="RiverSpawnPoints" unique_id=1591117790 instance=ExtResource("5_6761a")]
 position = Vector2(576, 112)
-variants = Array[PackedScene]([ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
+variants = Array[PackedScene]([ExtResource("6_dga24"), ExtResource("4_sk5k4"), ExtResource("5_oc4kc")])
 direction = -1
 min_speed = 100.0
 max_speed = 105.0

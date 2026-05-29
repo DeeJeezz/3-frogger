@@ -322,10 +322,6 @@ size = Vector2(10, 10)
 
 [node name="Frogger" type="Node2D" unique_id=395855831]
 script = ExtResource("1_o6omq")
-move_sfx = ExtResource("2_8e8fl")
-water_death_sfx = ExtResource("5_t384a")
-road_death_sfx = ExtResource("4_x5484")
-finish_sfx = ExtResource("3_1t0a8")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=198978880]
 texture = ExtResource("2_1t0a8")
@@ -336,10 +332,9 @@ region_rect = Rect2(96, 0, 16, 16)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1015564047]
 sprite_frames = SubResource("SpriteFrames_56thx")
-animation = &"pre_finish"
+animation = &"finish"
 autoplay = "idle_down"
-frame = 2
-frame_progress = 1.0
+frame_progress = 0.48843327
 centered = false
 offset = Vector2(0, -2)
 
@@ -350,7 +345,16 @@ collision_mask = 6
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_o6omq")
 
-[node name="SFXPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1252318659]
+[node name="MoveSFXPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1252318659]
+stream = ExtResource("2_8e8fl")
+
+[node name="RoadDeathSFXPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1961464759]
+stream = ExtResource("4_x5484")
+
+[node name="WaterDeathSFXPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1660120516]
+stream = ExtResource("5_t384a")
+
+[node name="FinishSFXPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1275360934]
 stream = ExtResource("3_1t0a8")
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

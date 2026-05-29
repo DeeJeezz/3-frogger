@@ -27,6 +27,8 @@ func set_level_time(time: int) -> void:
 	time_progress_bar.value = time
 
 
-func setup(level_time: int) -> void:
+func setup(level_time: int, start_level_time: int) -> void:
 	time_progress_bar.max_value = level_time
 	time_progress_bar.value = time_progress_bar.max_value
+	
+	set_start_level_time(start_level_time)

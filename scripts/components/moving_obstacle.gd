@@ -1,21 +1,28 @@
 class_name MovingObstacle
 extends Area2D
 
+@export var speed: float = 100.0
+
 var direction: Vector2 = Vector2.RIGHT
-var speed: float = 100.0
+
+var sprite: Sprite2D
 
 var _frogger: Frogger
 
-@onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
+	for child in get_children():
+		if child is Sprite2D:
+			sprite = child
+
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
 
-	if direction.x == -1:
-		sprite.flip_h = true
+	if sprite:
+		if direction.x == -1:
+			sprite.flip_h = true
 
 	_resize_collision()
 
@@ -32,6 +39,8 @@ func _process(delta: float) -> void:
 
 
 func _resize_collision() -> void:
+	if not sprite:
+		return
 	collision_shape.shape = RectangleShape2D.new()
 	collision_shape.shape.size = sprite.get_rect().size
 	collision_shape.position.y = Constants.STEP_SIZE / 2.0
