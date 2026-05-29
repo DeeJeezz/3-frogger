@@ -25,6 +25,7 @@ ground_layer = NodePath("Ground")
 level_timer = NodePath("LevelTimer")
 start_level_timer = NodePath("StartLevelTimer")
 hud = NodePath("HUD")
+finish_tiles = 1
 
 [node name="Background" type="Sprite2D" parent="." unique_id=1107247405]
 position = Vector2(240, 135.99998)

@@ -25,7 +25,7 @@ extends Node2D
 			hud.set_start_level_time(value)
 
 # How many times player can die.
-var lives: int = 7:
+var lives: int = 3:
 	set(value):
 		lives = value
 		hud.set_lives(lives)
@@ -47,7 +47,7 @@ var _frogger: Frogger
 func _ready() -> void:
 	level_timer.timeout.connect(_on_level_timer_timeout)
 	start_level_timer.timeout.connect(_on_start_level_timer_timeout)
-	hud.setup(_level_time, time_to_start)
+	hud.setup(lives, _level_time, time_to_start)
 	_spawn_frogger(false)
 
 	Signals.add_life.connect(_on_add_life)
@@ -94,9 +94,10 @@ func _on_frogger_died() -> void:
 	lives -= 1
 	if lives > 0:
 		_spawn_frogger(true)
-	# Loose game condition.
+	# Defeat game condition.
 	else:
-		level_timer.stop()
+		_defeat()
+		return
 
 
 ## Checks if [param] tile is "Water" tile. Sets [member Frogger.is_on_water].
@@ -121,9 +122,22 @@ func _check_is_on_finish(tile: TileData, tile_position: Vector2i) -> void:
 
 		# Win game condition.
 		if _occupied_tiles.size() == finish_tiles:
+			_win()
 			return
 
 		_spawn_frogger(true)
+
+
+func _win() -> void:
+	level_timer.stop()
+	var win_scene: PackedScene = load(Constants.WIN_SCREEN_SCENE_PATH)
+	get_tree().current_scene.call_deferred("add_child", win_scene.instantiate())
+
+
+func _defeat() -> void:
+	level_timer.stop()
+	var defeat_scene: PackedScene = load(Constants.DEFEAT_SCREEN_SCENE_PATH)
+	get_tree().current_scene.call_deferred("add_child", defeat_scene.instantiate())
 
 
 ## Signal processor of current [Frogger] movement. Checks if current [Frogger] is on "Water" of "Finish" tile.
