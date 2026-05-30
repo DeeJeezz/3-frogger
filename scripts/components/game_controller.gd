@@ -25,7 +25,7 @@ extends Node2D
 			hud.set_start_level_time(value)
 
 # How many times player can die.
-var lives: int = 3:
+var lives: int = 7:
 	set(value):
 		lives = value
 		hud.set_lives(lives)
