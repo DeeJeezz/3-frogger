@@ -1,8 +1,10 @@
 [gd_scene format=3 uid="uid://q5bfeyndn74n"]
 
 [ext_resource type="FontFile" uid="uid://bsv73vo3pe3k1" path="res://assets/fonts/OptionB_SuperstarMemesbruh03.ttf" id="1_aql0t"]
+[ext_resource type="Script" uid="uid://dku0unchp2hck" path="res://scripts/ui/game_over_screen.gd" id="1_mbt5b"]
 
 [node name="WinScreen" type="CanvasLayer" unique_id=931561498]
+script = ExtResource("1_mbt5b")
 
 [node name="Panel" type="Panel" parent="." unique_id=1592523408]
 anchors_preset = 15
@@ -18,10 +20,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -37.5
+offset_top = -75.0
+offset_right = 37.5
+offset_bottom = -23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 3
@@ -30,3 +32,32 @@ theme_override_font_sizes/font_size = 52
 text = "Win"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1726208911]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -6.0
+offset_right = 97.0
+offset_bottom = 103.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestartGameButton" type="Button" parent="Panel/VBoxContainer" unique_id=1903381686]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_aql0t")
+theme_override_font_sizes/font_size = 16
+text = "Restart game"
+
+[node name="MainMenuButton" type="Button" parent="Panel/VBoxContainer" unique_id=1447815182]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_aql0t")
+theme_override_font_sizes/font_size = 16
+text = "main menu"
+
+[connection signal="button_down" from="Panel/VBoxContainer/RestartGameButton" to="." method="_on_restart_game_button_button_down"]
+[connection signal="button_down" from="Panel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_button_down"]
