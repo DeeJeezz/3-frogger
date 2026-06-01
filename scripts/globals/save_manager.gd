@@ -28,4 +28,5 @@ func load_last_session() -> Dictionary:
 	if json.parse(content) == OK:
 		return json.data
 	push_error("Unable to parse save file")
+	save_session({})
 	return {}
