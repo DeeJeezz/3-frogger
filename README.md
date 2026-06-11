@@ -1,6 +1,6 @@
 # Frogger
 
-![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/deejeezz/3-frogger/deploy-itch.yml)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/deejeezz/3-frogger/deploy.yaml)
 ![GitHub Tag](https://img.shields.io/github/v/tag/deejeezz/3-frogger)
 
 https://20_games_challenge.gitlab.io/games/frogger/
@@ -8,6 +8,8 @@ https://20_games_challenge.gitlab.io/games/frogger/
 ## Where to play
 
 Itch.io - https://deejeezz.itch.io/frogger
+
+Github Pages - https://deejeezz.github.io/3-frogger/
 
 ## Destription
 
