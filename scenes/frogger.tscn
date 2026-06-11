@@ -332,9 +332,8 @@ region_rect = Rect2(96, 0, 16, 16)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1015564047]
 sprite_frames = SubResource("SpriteFrames_56thx")
-animation = &"finish"
+animation = &"idle_down"
 autoplay = "idle_down"
-frame_progress = 0.48843327
 centered = false
 offset = Vector2(0, -2)
 
