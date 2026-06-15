@@ -42,9 +42,9 @@ func _resize_collision() -> void:
 	if not sprite:
 		return
 	collision_shape.shape = RectangleShape2D.new()
-	collision_shape.shape.size = sprite.get_rect().size
-	collision_shape.position.y = Constants.STEP_SIZE / 2.0
-	collision_shape.position.x = collision_shape.shape.size.x / 2.0
+	var sprite_size: Vector2 = sprite.get_rect().size
+	collision_shape.shape.size = sprite_size * 0.9
+	collision_shape.position = sprite_size / 2.0
 
 
 func _on_frogger_died() -> void:
