@@ -63,7 +63,7 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}
         run: |
-          mkdir unpacked && cd unpacked
+          mkdir unpacked/ && mv artifact.tar unpacked/ && cd unpacked/
           tar -xvf artifact.tar
           ./butler-bin/butler push . ${ITCH_GAME}:html5 --userversion ${GITHUB_REF_NAME}
 
