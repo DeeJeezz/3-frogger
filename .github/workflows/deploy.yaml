@@ -63,8 +63,9 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}
         run: |
-          tar -xvf artifact.tar ${BUILD_DIR}
-          ./butler-bin/butler push ${BUILD_DIR} ${ITCH_GAME}:html5 --userversion ${GITHUB_REF_NAME}
+          mkdir unpacked && cd unpacked
+          tar -xvf artifact.tar
+          ./butler-bin/butler push . ${ITCH_GAME}:html5 --userversion ${GITHUB_REF_NAME}
 
   deploy-pages:
     needs: build
