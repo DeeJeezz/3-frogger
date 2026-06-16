@@ -39,7 +39,7 @@ jobs:
         ./Godot_v${GODOT_VERSION}-stable_linux.x86_64 --headless --export-release "Web" ${BUILD_DIR}/index.html
 
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-pages-artifact@v5
       with:
         name: 'build'
         path: 'builds/web'
@@ -58,12 +58,12 @@ jobs:
         uses: actions/download-artifact@v8
         with:
           name: 'build'
-          path: 'builds/web'
 
       - name: Push to itch.io
         env:
           BUTLER_API_KEY: ${{ secrets.ITCH_API_KEY }}
         run: |
+          tar -xvf artifact.tar ${BUILD_DIR}
           ./butler-bin/butler push ${BUILD_DIR} ${ITCH_GAME}:html5 --userversion ${GITHUB_REF_NAME}
 
   deploy-pages:
