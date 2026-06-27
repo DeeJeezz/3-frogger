@@ -11,7 +11,7 @@ Itch.io - https://deejeezz.itch.io/frogger
 
 Github Pages - https://deejeezz.github.io/3-frogger/
 
-## Destription
+## Description
 
 “Frogger has the ominous distinction of being the arcade game with the most ways to die” (Softline, 1982)
 Frogger was released in Japan in 1981. The designer, Akira Hashimoto, came up with the idea for the game after he saw a frog trying to cross the road while Hashimoto was stopped at a red light. Instead of distinguishing itself as a technical masterpiece, the game stood out for its “nonviolent” gameplay and unique premise.
